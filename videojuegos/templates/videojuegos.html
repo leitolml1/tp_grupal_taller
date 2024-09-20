@@ -1,0 +1,8 @@
+{% block content %}
+    <h1>Juegos</h1>
+    <ul>
+        {% for videojuego in videojuegos %}
+        <li> {{ videojuego.titulo }} {{videojuego.plataforma}} {{videojuego.genero}} {{videojuego.stock}} </li>
+    </ul>
+
+{endblock}
