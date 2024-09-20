@@ -1,37 +1,42 @@
+{% extends 'navegacion.html' %}
+{% load static %}
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Alquileres</title>
+        <link rel="stylesheet" href="{% static 'css/alquiler_styles.css' %}?{% now 'U' %}">
+    </head>
+    <body>
+        {% block content %}
     <div>
         <h1>Alquileres</h1>
     </div>
+
     <div>
-        <form action="{% url 'crear_alquiler' %}">
-            <button>Alquilar Videojuego</button>
-        </form>
+        <h2>Alquilar Videojuego</h2>
+        <a href="{% url 'crear_alquiler' %}" class="btn-alquilar">Nuevo Alquiler</a>
     </div>
+
     <div>
         <h2>Lista de alquileres</h2>
-        <table>
-            {% for alquiler in alquileres %}
-            {{alquiler.cliente}}
-            {{alquiler.videojuego}}
-            {{alquiler.estado}}
-            {{alquiler.fecha_alquiler}}
-            {{alquiler.fecha_devolucion}}
-            {% if alquiler.estado == "Alquilado" %}
-            <form action="{% url 'concretar_alquilar' alquiler.id %}" method="post">
-                {% csrf_token %}
-
-                <button>Concretar</button>
-            </form>
-            {% endif %}
-            {% endfor %}
-        </table>
+        {% for alquiler in alquileres %}
+            <div class="alquiler-item">
+                <p><strong>Cliente:</strong> {{alquiler.cliente}}</p>
+                <p><strong>Videojuego:</strong> {{alquiler.videojuego}}</p>
+                <p><strong>Estado:</strong> <span class="estado {% if alquiler.estado == 'Alquilado' %}estado-alquilado{% else %}estado-disponible{% endif %}">{{alquiler.estado}}</span></p>
+                <p><strong>Fecha de alquiler:</strong> {{alquiler.fecha_alquiler}}</p>
+                <p><strong>Fecha de devolución:</strong> {{alquiler.fecha_devolucion}}</p>
+                {% if alquiler.estado == "Alquilado" %}
+                    <form method="post" action="{% url 'concretar_devolucion' alquiler.id %}">
+                        {% csrf_token %}
+                        <button type="submit" class="btn-concretar">Concretar devolución</button>
+                    </form>
+                {% endif %}
+            </div>
+        {% endfor %}
     </div>
+    {% endblock %}
 </body>
 </html>
