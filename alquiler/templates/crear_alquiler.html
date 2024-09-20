@@ -11,6 +11,7 @@
     </div>
     <div>
         <form action="" method="post">
+            {% csrf_token %}
             {{form.as_p}}
             <button>Crear alquiler</button>
         </form>

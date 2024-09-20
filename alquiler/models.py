@@ -7,3 +7,4 @@ class alquiler(models.Model):
     videojuego=models.ForeignKey(videojuego,on_delete=models.CASCADE)
     fecha_alquiler=models.DateTimeField()
     fecha_devolucion=models.DateTimeField(null=True,blank=True)
+    estado=models.CharField(max_length=100,null=True,default="Sin estado")

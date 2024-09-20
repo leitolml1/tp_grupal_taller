@@ -17,7 +17,20 @@
     <div>
         <h2>Lista de alquileres</h2>
         <table>
+            {% for alquiler in alquileres %}
+            {{alquiler.cliente}}
+            {{alquiler.videojuego}}
+            {{alquiler.estado}}
+            {{alquiler.fecha_alquiler}}
+            {{alquiler.fecha_devolucion}}
+            {% if alquiler.estado == "Alquilado" %}
+            <form action="{% url 'concretar_alquilar' alquiler.id %}" method="post">
+                {% csrf_token %}
 
+                <button>Concretar</button>
+            </form>
+            {% endif %}
+            {% endfor %}
         </table>
     </div>
 </body>
