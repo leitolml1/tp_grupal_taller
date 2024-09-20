@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import videojuego
-from .forms import videojuegoform
+from .forms import VideojuegoForm
 
 # Create your views here.
 
@@ -10,11 +10,12 @@ def videojuego_lista(request):
 
 def agregar_videojuego(request):
     if request.method == 'POST':
-        form = videojuegoform(request.POST)
+        form = VideojuegoForm(request.POST)
         if form.is_valid():
             form.save()
             return  redirect('videojuegos')
     else:
-        form = videojuegoform()
-    return render(request,'videojuego/agregar_videojuego.html',{'form': form})
-        
+        return render(request,"agregar_videojuego.html",{
+            "form":VideojuegoForm()
+        })
+

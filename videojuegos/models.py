@@ -8,5 +8,5 @@ class videojuego(models.Model):
     titulo = models.CharField(max_length=200)
     plataforma = models.ForeignKey(plataforma,on_delete=models.CASCADE)
     genero = models.ForeignKey(genero,on_delete=models.CASCADE)
-    stock = models. IntegerField() #ver esto
+    stock = models.IntegerField() #ver esto
     

@@ -1,8 +1,8 @@
 from django import forms
 from .models import videojuego
 
-class videojuegoForm(forms.ModelForm):
+class VideojuegoForm(forms.ModelForm):
     class Meta:
-        models = videojuego
-        fiels = ('titulo','plataforma','genero','stock')
+        model = videojuego
+        fields = ['titulo','plataforma','genero','stock']
             
