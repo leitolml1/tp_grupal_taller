@@ -1,0 +1,14 @@
+{% block content %}
+    <h1>Juegos</h1>
+    <div>
+        <form action="{% url 'agregar_videojuego' %}">
+            <button>Agregar videojuego</button>
+        </form>
+    </div>
+    <ul>
+        {% for videojuego in videojuegos %}
+        <li> {{ videojuego.titulo }} {{videojuego.plataforma}} {{videojuego.genero}} {{videojuego.stock}} </li>
+        {% endfor %}
+    </ul>
+
+{% endblock %}
