@@ -1,15 +1,45 @@
-{% extends 'navegacion.html' %}
-{% block content %}
     <h1>Juegos</h1>
     <div>
         <form action="{% url 'agregar_videojuego' %}">
             <button>Agregar videojuego</button>
         </form>
     </div>
-    <ul>
-        {% for videojuego in videojuegos %}
-        <li> {{ videojuego.titulo }} {{videojuego.plataforma}} {{videojuego.genero}} {{videojuego.stock}} </li>
-        {% endfor %}
-    </ul>
+    <div class="dropdown">
+        <h2>Seleccionar Genero</h2>
+        <form action="{% url 'filtrar_genero' %}" method="POST">
+            {% csrf_token %}
+            <select name="genero" id="genero">
+                <option value="noFiltrar">No filtrar</option>
+                {% for genero in generos %}
+                <option value="{{genero.id}}">{{ genero.nombre }}</option>
+                {% endfor %}
 
-{% endblock %}
+            </select>
+            <button>Aplicar</button>
+        </form>
+   
+    </div>
+    <div class="dropdown"></div>
+        <h2>Seleccionar plataforma</h2>
+        <form action="{% url 'filtrar_plataforma' %}" method="POST">
+            {% csrf_token %}
+            <select name="plataforma" id="plataforma">
+                <option value="noFiltrar">No filtrar</option>
+                {% for plataforma in plataformas %}
+                <option value="{{plataforma.id}}">{{ plataforma.nombre }}</option>
+                {% endfor %}
+
+            </select>
+            <button>Aplicar</button>
+        </form>
+   
+    </div>
+    <div>
+        {% for juego in juegos %}
+        <li> {{ juego.titulo }} {{juego.plataforma.nombre}} {{juego.genero.nombre}} {{juego.stock}} </li>
+        {% endfor %}
+    </div>
+        
+  
+
+    
